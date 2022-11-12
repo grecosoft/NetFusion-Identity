@@ -70,3 +70,11 @@ VALUES
     ('StateOrProvince', 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/stateorprovince'),
     ('StreetAddress',   'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/streetaddress'),
     ('Role',            'http://schemas.microsoft.com/ws/2008/06/identity/claims/role')
+
+
+DECLARE @DashboardScope UNIQUEIDENTIFIER
+SELECT @DashboardScope = ClaimScopeId from [dbo].ClaimScopes WHERE [Key] = 'dashboard'
+
+INSERT INTO [dbo].RoleTypes([ClaimScopeId], [Value], [Description])
+VALUES 
+    (@DashboardScope, 'Admin', 'Allows dashboard access for adding claims to users.');
