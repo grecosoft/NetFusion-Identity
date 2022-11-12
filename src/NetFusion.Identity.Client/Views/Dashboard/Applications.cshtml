@@ -1,0 +1,21 @@
+@model DashboardModel
+
+@if (!Model.HasApplications)
+{
+    <div class="alert alert-warning" role="alert">
+        You currently don't have any available applications.
+    </div>
+}
+
+@foreach (var application in @Model.Applications)
+{
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+          <h5 class="card-title bi @application.IconName" style="color: @application.Color">
+              &nbsp;@application.Name
+          </h5>
+        <p class="card-text">@application.Description</p>
+        <a href="@application.Url" target="_blank" class="card-link">View</a>
+      </div>
+    </div>
+}

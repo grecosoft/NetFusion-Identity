@@ -1,0 +1,39 @@
+@model RegistrationModel
+
+<div id="newAccount" class="page-content row d-xl-flex justify-content-center">
+    <div class="col-md-4">
+        <section>
+            <form method="post" asp-action="NewAccount">
+                <h2>Create New Account</h2>
+                <hr />
+                <div class="alert alert-info" role="alert">
+                    Enter the following information to create a new account.  Once a valid
+                    email address and passwords are entered, you will receive an email to
+                    conform the account.
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-floating">
+                    <input asp-for="Email" class="form-control" autocomplete="off" aria-required="true" />
+                    <label asp-for="Email" class="form-label">Email</label>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Password" type="password" autocomplete="off" class="form-control"
+                           aria-required="true" />
+                    <label asp-for="Password" class="form-label">Password</label>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="ConfirmedPassword" type="password" autocomplete="off" class="form-control"
+                           aria-required="true" />
+                    <label asp-for="ConfirmedPassword" class="form-label">Renter Password</label>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="PhoneNumber" class="form-control" aria-required="false" />
+                    <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                </div>
+                <div>
+                    <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

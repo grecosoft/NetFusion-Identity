@@ -1,0 +1,61 @@
+﻿@model NetFusion.Identity.Client.Models.Authentication.TwoFactorLoginModel
+
+<div id="twoFactorLogin" class="page-content row d-xl-flex justify-content-center">
+
+@if (!ViewBag.UseRecoveryCode)
+{
+    <div class="col-md-5">
+        <section>
+            <h2>Authenticator Code Login</h2>
+            <hr />
+            <div class="alert alert-info" role="alert">
+                Your account is configured with Two Factor Authentication using an Authenticator.
+                Please open your Authenticator and enter the provided code. If you don't have
+                access to your Authenticator and have a Recover Code, click the link below.
+            </div>
+
+            <form method="post" asp-action="TwoFactorAuthenticatorCodeLogin">
+                <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl"/>
+                <div class="form-floating">
+                    <input type="text" asp-for="AuthenticatorCode" class="form-control" autocomplete="off" aria-required="true"/>
+                    <label asp-for="AuthenticatorCode" class="form-label">Authenticator Code</label>
+                </div>
+                <div class="checkbox">
+                    <label asp-for="RememberClient" class="form-label">
+                        <input class="form-check-input" asp-for="RememberClient"/>
+                        Remember Client
+                    </label>
+                </div>
+                <button type="submit" class="w-100 btn btn-lg btn-primary">Validate</button>
+            </form>
+        </section>
+        <section>
+            <a asp-action="TwoFactorLogin" asp-route-recovery="true">Use Recovery Code</a>
+        </section>
+    </div>
+}
+else
+{
+    <div class="col-md-5">
+        <section>
+            <h2>Recovery Code Login</h2>
+            <hr />
+            <div class="alert alert-info" role="alert">
+                Enter a Two Factor Authentication recovery code.
+            </div>
+
+            <form method="post" asp-action="TwoFactorRecoveryCodeLogin">
+                <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl"/>
+                <div class="form-floating">
+                    <input type="text" asp-for="RecoveryCode" class="form-control" autocomplete="off" aria-required="true"/>
+                    <label asp-for="RecoveryCode" class="form-label">Recovery Code</label>
+                </div>
+                <button type="submit" class="recovery-code w-100 btn btn-lg btn-primary">Validate</button>
+            </form>
+        </section>
+        <section>
+            <a asp-action="TwoFactorLogin">Use Authenticator Code</a>
+        </section>
+    </div>
+}
+</div>

@@ -1,0 +1,18 @@
+<div id="authenticatorConfirmReset" class="page-content row d-xl-flex justify-content-center">
+    <div class="col-md-4">
+        <section>
+            <h2>Reset Authenticator</h2>
+            <hr />
+            <div class="alert alert-danger" role="alert">
+                Resetting your Authenticator will disable Two-Factor authentication
+                and generate a new Authenticator key.  Since a new key will be
+                generated, you will need to reconfigure you Authenticator using
+                the new provided key.
+            </div>
+            <form method="post" asp-action="Reset">
+                <button type="submit" class="w-100 btn btn-lg btn-danger">Reset</button>
+            </form>
+            <a asp-action="TwoFactorConfiguration" asp-controller="AccountSettings" class="w-100 btn btn-lg btn-primary">Cancel</a>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+﻿<div id="emailConfirmation" class="page-content row d-xl-flex justify-content-center">
+    <div class="col-md-4">
+        <section>
+            <h2>Email Confirmation</h2>
+            <hr/>
+            <div class="alert alert-info" role="alert">
+                Please enter your email address to complete confirmation.  After you account
+                is confirmed, you will be asked to login.
+            </div>
+        </section>
+        <section>
+            <form asp-action="EmailConfirmation" method="post">
+                <div class="form-floating">
+                    <input id="email" name="email" type="email" class="email form-control" aria-required="true" />
+                    <label for="email" class="form-label">Email</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+        </section>
+    </div>
+</div>
+

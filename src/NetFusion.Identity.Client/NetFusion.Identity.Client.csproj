@@ -1,0 +1,96 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-Identity.Client-C5BC26C1-D002-42E8-AE57-68063383BF15</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog" Version="2.12.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="5.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Components\NetFusion.Identity.App\NetFusion.Identity.App.csproj" />
+    <ProjectReference Include="..\Components\NetFusion.Identity.Domain\NetFusion.Identity.Domain.csproj" />
+    <ProjectReference Include="..\Components\NetFusion.Identity.Infra\NetFusion.Identity.Infra.csproj" />
+  </ItemGroup>
+
+  <Target Name="Install NPM modules" BeforeTargets="Build" Inputs="package-lock.json" Outputs="node_modules/.install-stamp">
+    <Exec Command="npm ci" Condition="'$(OS)' != 'Windows_NT'" />
+    <Exec Command="npm install" Condition="'$(OS)' == 'Windows_NT'" />
+    <Touch Files="node_modules/.install-stamp" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="Compile SCSS" BeforeTargets="Build">
+    <Exec Command="npm run build:css" />
+    <Copy SourceFiles="$(ProjectDir)wwwroot/css/site.css" DestinationFolder="$(PublishDir)wwwroot/css" />
+  </Target>
+
+  <ItemGroup>
+    <None Remove="Controllers\" />
+    <None Remove="Views\" />
+    <None Remove="Models\" />
+    <None Remove="Views\Login\" />
+    <None Remove="Views\Authenticator\" />
+    <None Remove="Models\Authenticator\" />
+    <None Remove="Models\Login\" />
+    <None Remove="Models\Registration\" />
+    <None Remove="Models\TwoFactor\" />
+    <None Remove="Views\TwoFactor\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Authentication\" />
+    <Folder Include="Views\Authenticator\" />
+    <Folder Include="Models\Authentication\" />
+    <Folder Include="Models\Registration\" />
+    <Folder Include="wwwroot\lib\bootstrap-icons\font\fonts" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\css" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\js" />
+    <Folder Include="wwwroot\lib\jquery-validation-unobtrusive" />
+    <Folder Include="wwwroot\lib\jquery-validation\dist" />
+    <Folder Include="wwwroot\lib\jquery\dist" />
+    <Folder Include="wwwroot\lib\qrcode" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\styles\site.scss" />
+    <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Privacy.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\_LoginPartial.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Configuration\Preferences.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\site.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Error.cshtml" />
+    <UpToDateCheckInput Remove="Pages\Index.cshtml" />
+    <UpToDateCheckInput Remove="Pages\Privacy.cshtml" />
+    <UpToDateCheckInput Remove="Pages\Shared\_Layout.cshtml" />
+    <UpToDateCheckInput Remove="Pages\Shared\_LoginPartial.cshtml" />
+    <UpToDateCheckInput Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+    <UpToDateCheckInput Remove="Pages\_ViewImports.cshtml" />
+    <UpToDateCheckInput Remove="Pages\_ViewStart.cshtml" />
+  </ItemGroup>
+</Project>

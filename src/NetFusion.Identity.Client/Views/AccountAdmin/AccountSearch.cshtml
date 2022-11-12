@@ -1,0 +1,44 @@
+@model IEnumerable<NetFusion.Identity.Domain.IUserIdentity>
+
+<div id="accountSearch">
+    <h4>Account Search</h4>
+    <hr />
+    <div class="col-md-5">
+        <section>
+            <div class="alert alert-info" role="alert">
+                Search for an existing account to view and edit settings.
+            </div>
+            <form method="get" asp-action="AccountSearch">
+                <label for="criteria" class="control-label form-label">Email Address</label>
+                <input type="text" id="criteria" class="form-control" autocomplete="false" name="criteria" required minlength="5"/>
+                <button type="submit" class="w-100 btn btn-lg btn-primary">Search</button>
+            </form>
+        </section>
+        <section>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">Confirmed</th>
+                    <th scope="col">Two-Factor Enabled</th>
+                    <th scope="col">Locked Out</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var account in @Model)
+                {
+                    <tr>
+                        <th scope="row">@account.Email</th>
+                        <td>@(account.EmailConfirmed ? "Yes" : "No")</td>
+                        <td>@(account.TwoFactorEnabled ? "Yes" : "No")</td>
+                        <td>@(account.LockoutEnd == null ? "Yes" : "No")</td>
+                        <td><a asp-action="Claims" class="btn btn-sm btn-primary" asp-route-criteria="@ViewBag.Criteria" asp-route-userId="@account.Id">Claims</a> </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>

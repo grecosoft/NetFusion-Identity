@@ -1,0 +1,27 @@
+@model AccountClaimsModel
+
+<tr>
+    <td>
+        <form id="newClaimForm" method="post" asp-action="AddNewClaim">
+            <input type="hidden" name="userId" value="@Model.UserId" />
+            @Html.DropDownList("claimScopeId", Model.Scopes,
+                new
+                {
+                    @class = "form-select form-select-lg mb-3"
+                })
+        </form>
+    </td>
+    <td>
+        @Html.DropDownList("claimTypeId", Model.Claims,
+            new
+            {   form = "newClaimForm",
+                @class = "form-select form-select-lg mb-3"
+            })
+    </td>
+    <td>
+        <input form="newClaimForm" type="text" name="claimValue" class="form-control" required />
+    </td>
+    <td>
+        <button form="newClaimForm" type="submit" class="btn btn-primary">Add Claim</button>
+    </td>
+</tr>

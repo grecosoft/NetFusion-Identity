@@ -1,0 +1,51 @@
+@model TwoFactorConfigurationModel
+
+@{
+    Layout = "_SettingsLayout";
+}
+
+<div id="twoFactorConfiguration" class="row d-xl-flex justify-content-center">
+    <div class="col-md-6">
+        <section>
+            <h2>Two Factor Configuration</h2>
+            <hr/>
+            <div class="alert alert-info" role="alert">
+                This page allows for configuring Two Factor Authorization. Once configured,
+                you will be asked to provided a secondary code when logging in.
+            </div>
+        </section>
+        
+        @if (Model.IsEnabled)
+        {
+            <section>
+                <h3>Two Factor Settings</h3>
+                <hr/>
+                <p>Two Factor Authroization is currently configured.</p>
+                <a asp-action="TwoFactorConfirmDisable" class="btn btn-primary">Disable Two-Factor</a>
+                <a asp-action="TwoFactorRecoveryCodes" class="btn btn-primary">Recovery Codes</a>
+            </section>
+        }
+        
+        @if (!Model.HasAuthenticator)
+        {
+            <section>
+                <h3>Two Factor Settings</h3>
+                <hr/>
+                <p>To start using Two Factory Authorization, add an Authenticator.</p>
+                <a asp-action="Setup" asp-controller="Authenticator" class="btn btn-success">Add Authenticator</a>
+            </section>
+        }
+        else
+        {
+            <section>
+                <h3>Authenticator Settings</h3>
+                <hr/>
+                <p>You already have an Authenticator configured.</p>
+                <a asp-action="Setup" asp-controller="Authenticator" class="btn btn-primary">Setup Authenticator</a>
+                <a asp-action="ConfirmReset" asp-controller="Authenticator" class="btn btn-primary">Reset Authenticator</a>
+            </section>
+        }
+    </div>
+</div>
+
+

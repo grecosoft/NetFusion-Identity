@@ -1,0 +1,27 @@
+﻿<div id="resendEmailConfirmation" class="page-content row d-xl-flex justify-content-center">
+    <div class="col-md-4">
+        <section>
+            <h2>Resend Email Confirmation</h2>
+            <hr/>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="alert alert-info" role="alert">
+                Please check you email and click the provided link to validate your 
+                account. Once your account is validated, you will be allowed to login.
+            </div>
+            If you need another account confirmation sent, please enter your email 
+            to sent another confirmation.
+        </section>
+        <section>
+            <form method="post" asp-action="SendEmailConfirmation">
+                <div class="form-floating">
+                    <input name="email" class="form-control" value="@ViewBag.Email" aria-required="true"/>
+                    <label class="form-label">Enter Email Address</label>
+                </div>
+                <button type="submit" class="w-100 btn btn-lg btn-primary">Send Email</button>
+            </form>
+        </section>
+    </div>
+</div>
+
+
+

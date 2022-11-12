@@ -1,0 +1,38 @@
+version: '3.4'
+services:
+    authclient:
+        container_name: auth-web-client
+        image: authclient
+        ports:
+            - 8082:80
+        depends_on:
+            - seq
+            - sql-server
+
+    seq:
+        container_name: seq-dev
+        image: datalust/seq:latest
+        volumes:
+            - seq_data:/data
+        environment:
+            - ACCEPT_EULA=Y
+        ports:
+            - 5341:5341
+            - 8041:80
+
+    sql-server:
+        container_name: sql-server-dev
+        image: sql-server-dev
+        build:
+            context: ./sql-server
+            dockerfile: Dockerfile
+        ports:
+            - "1433:1433"
+        volumes:
+            - sql_server_data:/var/opt/mssql
+
+volumes:
+    sql_server_data:
+        name: dev-sql-server_data
+    seq_data:
+        name: dev-seq_data

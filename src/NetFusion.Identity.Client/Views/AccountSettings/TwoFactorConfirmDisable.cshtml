@@ -1,0 +1,18 @@
+<div id="twoFactorConfirmDisable" class="page-content row d-xl-flex justify-content-center">
+    <div class="col-md-4">
+        <section>
+            <h2>Disable Two-Factor Authentication</h2>
+            <hr />
+            <div class="alert alert-danger" role="alert">
+                Disabling Two-Factor Authentication will require you to login with only
+                your email address and password.  An additional form of authentication
+                will no longer be required and is less secure. Two-Factor authentication
+                can be reenabled by reverifying your secondary form of authentication.
+            </div>
+            <form method="post" asp-action="Disable">
+                <button type="submit" class="w-100 btn btn-lg btn-danger">Disable</button>
+            </form>
+            <a asp-action="TwoFactorConfiguration" class="w-100 btn btn-lg btn-primary">Cancel</a>
+        </section>
+    </div>
+</div>

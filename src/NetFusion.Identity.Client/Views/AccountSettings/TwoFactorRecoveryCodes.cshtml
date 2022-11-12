@@ -1,0 +1,56 @@
+@model TwoFactorConfigurationModel
+
+<div id="twoFactorRecoveryCodes" class="page-content row d-xl-flex justify-content-center">
+    <div class="col-md-5">
+
+        @if (@Model.RecoveryCodes.Any())
+        {
+            <section>
+                <h4>Two-Factor Recovery Codes</h4>
+                <hr/>
+
+                @if (@Model.RemainingRecoveryCodes < 3)
+                {
+                    <div class="alert alert-warning" role="alert">
+                        You currently only have @Model.RemainingRecoveryCodes remaining recovery codes.
+                        It is suggested that you create a new list soon.
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info" role="alert">
+                        You currently have @Model.RemainingRecoveryCodes recovery codes that can be
+                        used if you don't have access to your authenticator. Please save the below
+                        recovery codes for future use. These codes can only be used once to login.
+                    </div>
+                }
+                <ul class="list-group">
+                    @for (int i = 0; i < @Model.RecoveryCodes.Length; i += 2)
+                    {
+                        <li class="list-group-item">
+                            <span>@Model.RecoveryCodes[i]</span>
+
+                            @if (i < @Model.RecoveryCodes.Length - 1)
+                            {
+                                <span>@Model.RecoveryCodes[i + 1]</span>
+                            }
+                        </li>
+                    }
+                </ul>
+            </section>
+        }
+        <section>
+            <h4>Recovery Code Generation</h4>
+            <hr/>
+            <div class="alert alert-danger" role="alert">
+                Resetting you recovery code will make any current code invalid. You currently
+                have @Model.RemainingRecoveryCodes codes remaining. Please use this option if
+                you are running low on recovery codes or would like to generate a new list.
+            </div>
+            <form method="post" asp-action="ResetRecoveryCodes">
+                <button type="submit" class="w-100 btn btn-danger">Generate Codes</button>
+            </form>
+            <a asp-action="TwoFactorConfiguration" class="w-100 btn btn-primary">Back</a>
+        </section>
+    </div>
+</div>

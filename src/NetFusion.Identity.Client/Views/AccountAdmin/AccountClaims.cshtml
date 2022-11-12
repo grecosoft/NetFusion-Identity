@@ -1,0 +1,61 @@
+@using System.Security.Claims
+@model AccountClaimsModel
+
+<h3>Claims</h3>
+<h5>@Model.Email</h5>
+<hr />
+
+<a type="button" class="btn btn-primary" asp-action="AccountSearch" asp-route-criteria="@Model.Criteria">Return to Search</a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Scope</th>
+        <th scope="col">Name</th>
+        <th scope="col">Value</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+        @await Html.PartialAsync("_NewClaimEntry", @Model)
+        @await Html.PartialAsync("_NewRoleEntry", @Model)
+    
+        @foreach (var claim in @Model.UserClaims)
+        {
+            <tr>
+                <td>@claim.Scope</td>
+                <td>@claim.Name</td>
+                <td>
+                    <form id="claimEdit-@claim.ClaimUserValueId" method="post" asp-action="EditExistingClaim">
+                        <input type="hidden" name="userId" value="@Model.UserId"/>
+                        <input type="hidden" name="claimUserValueId" value="@claim.ClaimUserValueId"/>
+                        
+                        @if (claim.Namespace == ClaimTypes.Role)
+                        {
+                            <span>@claim.Value</span>
+                        }
+                        else
+                        {
+                            <input type="text" name="claimValue" value="@claim.Value" class="form-control" required />
+                        }
+                    </form>
+                </td>
+                <td>
+                    @if (claim.Namespace != ClaimTypes.Role)
+                    {
+                        <button type="submit" form="claimEdit-@claim.ClaimUserValueId" class="btn btn-primary">Update</button>
+                    }
+                </td>
+                <td>
+                    <form method="post" asp-action="DeleteExistingClaim">
+                        <input type="hidden" name="userId" value="@Model.UserId"/>
+                        <input type="hidden" name="claimUserValueId" value="@claim.ClaimUserValueId"/>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

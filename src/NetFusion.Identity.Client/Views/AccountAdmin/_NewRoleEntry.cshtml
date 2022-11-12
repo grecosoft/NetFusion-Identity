@@ -1,0 +1,32 @@
+@model AccountClaimsModel
+
+<tr>
+    <td>
+        <form id="newRoleForm" method="post" asp-action="AddNewRole">
+            <input type="hidden" name="userId" value="@Model.UserId" />
+            <input type="hidden" name="criteria" value="@Model.Criteria" />
+            <input type="hidden" name="roleClaimTypeid" value="@Model.RoleClaimTypeId" />
+            @Html.DropDownList("roleClaimScopeId", Model.Scopes,
+                new
+                {
+                    @class = "form-select form-select-lg mb-3",
+                    onchange = @"
+                        var form = document.getElementById('newRoleForm');
+                        form.action = 'listRoles';
+                        form.submit();
+                    "
+                })
+        </form>
+    </td>
+    <td>
+        @Html.DropDownList("RoleValue", Model.Roles,
+            new
+            {   form = "newRoleForm",
+                @class = "form-select form-select-lg mb-3"
+            })
+    </td>
+    <td></td>
+    <td>
+        <button form="newRoleForm" type="submit" class="btn btn-primary">Add Role</button>
+    </td>
+</tr>

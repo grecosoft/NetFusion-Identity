@@ -1,0 +1,127 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: #f8f9fa;
+}
+
+.navbar-light .dashboard.navbar-brand {
+  color: #3b70bf;
+}
+
+.page-content {
+  h2 {
+    text-align: center;
+  }
+  .form-floating {
+    margin: 5px;
+  }
+  .checkbox {
+    padding-top: 10px;
+  }
+}
+
+#authorize {
+  .options {
+    padding-top: 10px;
+  }
+}
+
+#twoFactorLogin {
+  input[type='text'] {
+    max-width: 185px;
+  }
+  
+  section {
+    padding-bottom: 10px;
+    
+    .btn.recovery-code {
+      margin-top: 10px;
+    }
+  }
+}
+
+#resendEmailConfirm {
+  max-width: 550px;
+  .email {
+    max-width: 300px;
+  }
+}
+
+#authenticatorConfirmReset
+{
+  .btn {
+    margin-top: 10px;
+  }
+}
+
+#twoFactorConfiguration {
+  section {
+    padding-top: 20px;
+  }
+}
+
+#twoFactorConfirmDisable {
+  .btn {
+    margin-top: 10px;
+  }
+}
+
+#twoFactorRecoveryCodes {
+  section {
+    padding-bottom: 20px;
+  }
+  
+  .btn {
+    margin-top: 5px;
+  }
+  
+  .recovery-codes {
+      padding-top: 10px;
+  }
+  
+  ul.list-group {
+    max-width: 250px;
+    padding-top: 15px;
+    
+    li.list-group-item {
+      span {
+        padding-left: 20px;
+      }
+    }
+  }
+}
+
+#settingsMenu {
+  li.nav-item {
+    padding-bottom: 12px;
+    
+    a.btn {
+      min-width: 130px;
+    }
+  }
+}
+
+#accountSearch {
+  section {
+    padding-bottom: 15px;
+    
+    input[type='text'] {
+      max-width: 300px;
+      margin-bottom: 10px;
+    }
+  }
+}

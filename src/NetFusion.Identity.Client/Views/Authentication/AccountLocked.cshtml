@@ -1,0 +1,15 @@
+﻿@model NetFusion.Identity.Client.Models.Authentication.LoginModel
+
+<div id="authorize" class="page-content row d-xl-flex justify-content-center">
+    <div class="col-md-4">
+        <section>
+            <h2>Account Locked</h2>
+            <hr />
+            <div class="alert alert-danger" role="alert">
+                You account has been locked out.  Please try again later.
+            </div>
+            
+            <a asp-action="Login" asp-controller="Authentication" class="w-100 btn btn-lg btn-primary">Login</a>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+@using NetFusion.Identity.Client.Services
+
+@inject ILoginInfoService LoginSrv
+
+<ul id="settingsMenu" class="nav nav-pills flex-column">
+    <li class="nav-item"><a class="btn btn-outline-primary bi bi-file-lock2-fill" asp-action="ChangePassword" asp-controller="AccountSettings">&nbsp;Password</a></li>
+    <li class="nav-item"><a class="btn btn-outline-primary bi bi-qr-code" asp-action="TwoFactorConfiguration" asp-controller="AccountSettings">&nbsp;Two-factor</a></li>
+    
+    @if (LoginSrv.IsAdmin)
+    {
+        <li class="nav-item"><a class="btn btn-outline-danger bi bi-qr-code" asp-action="AccountSearch" asp-controller="AccountAdmin">&nbsp;Accounts</a></li>
+    }
+</ul>
+
